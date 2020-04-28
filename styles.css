@@ -1,0 +1,126 @@
+:root {
+  --main-color: rgba(18, 32, 54, 1);
+}
+
+@font-face {
+  font-family: myFont;
+  src: url(assets/MarcellusSC.ttf);
+}
+
+body {
+  background-color: var(--main-color);
+  color: white;
+  padding: 0;
+  margin: 0;
+  font-family: myFont;
+}
+
+/*flexbox layout*/
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-img {
+  flex-grow: 1;
+}
+
+/*header layout*/
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.25rem solid white;
+}
+
+.signin {
+  background: transparent;
+  border: transparent;
+  color: white;
+  font-size: 1.75rem;
+  margin-right: 1rem;
+  padding: 0.25rem 0.5rem;
+  font-family: myFont;
+}
+
+.signin:hover {
+  border-radius: 0.25rem;
+  color: var(--main-color);
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+}
+
+.logo {
+  font-size: 4rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/*main layout*/
+.main-img {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 350px;
+  padding: 0;
+  margin: 0;
+  background: url(assets/main1.jpg) no-repeat center / cover;
+}
+
+/*footer layout*/
+.footer {
+  display: flex;
+  flex-direction: column-reverse;
+  border-top: 0.25rem solid white;
+}
+
+.footer p {
+  display: flex;
+  font-size: 2rem;
+  margin: 0;
+  padding: 1rem;
+}
+
+.footer img {
+  width: 2rem;
+  height: 2rem;
+  padding: 1rem;
+  padding-right: 1rem;
+}
+
+.footer small {
+  padding: 1rem;
+}
+
+.top {
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+.top:hover {
+  opacity: 0.5;
+}
+
+/* mobile layout */
+@media screen and (min-width: 550px) {
+  .header .signin {
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer p {
+    margin-bottom: 0;
+  }
+}
