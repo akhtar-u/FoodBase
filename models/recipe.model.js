@@ -5,6 +5,7 @@ let RecipeSchema = new Schema(
   {
     userid: { type: String, required: true },
     recipename: { type: String, required: true },
+    image: { data: Buffer, contentType: String },
     ingredients: [{ type: String, required: true }],
     instructions: { type: String, required: true },
   },
