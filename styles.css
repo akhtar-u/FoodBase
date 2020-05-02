@@ -50,6 +50,7 @@ body {
   color: var(--main-color);
   background-color: white;
   padding: 0.25rem 0.5rem;
+  cursor: pointer;
 }
 
 .logo {
@@ -123,4 +124,46 @@ body {
   .footer p {
     margin-bottom: 0;
   }
+}
+
+/* Dashboard Layout */
+
+.gridheader {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  border-bottom: solid white 0.25rem;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.head1 {
+  display: grid;
+  justify-content: left;
+}
+
+.head2 {
+  display: grid;
+  justify-content: center;
+}
+.head3 {
+  display: grid;
+  justify-content: right;
+}
+
+input[name="search"] {
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.search {
+  display: inline-flex;
+  vertical-align: top;
+  position: relative;
+  top: 0.1rem;
+}
+#searchf {
+  margin-top: 0.25rem;
+}
+
+.main-db {
+  display: grid;
 }
