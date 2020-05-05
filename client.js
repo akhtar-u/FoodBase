@@ -35,6 +35,7 @@ function dashboardView(recipes) {
     // create list of recipes with delete/edit options
     let newDiv = document.createElement('div');
     $(newDiv).attr('class', 'recipediv');
+    newDiv.setAttribute('id', recipedID);
 
     let newLink = document.createElement('a');
     $(newLink).attr('href', '/recipe/' + recipedID);
@@ -42,23 +43,20 @@ function dashboardView(recipes) {
 
     let recipeli = document.createElement('li');
     recipeli.innerHTML = element.recipename;
-    recipeli.setAttribute('id', recipedID);
     $(recipeli).attr('class', 'recipeli');
 
     // add material icons and checkbox
+    // delete selected recipe <need to add jquery ajax>
+    $(newDiv).append(
+      '<a class="icona signin" onclick=deleteRecipe(this)>' +
+        '<i class="material-icons">delete_outline</i></a> '
+    );
+
     // edit selected recipe <need to add jquery ajax>
     $(newDiv).append(
       '<a class="icona signin" href=/recipe/' +
         recipedID +
         '/update>' +
-        '<i class="material-icons">delete_outline</i></a> '
-    );
-
-    // delete selected recipe <need to add jquery ajax>
-    $(newDiv).append(
-      '<a class="icona signin" href=/recipe/' +
-        recipedID +
-        '/delete>' +
         '<i class="material-icons">create</i></a> '
     );
 
@@ -72,4 +70,18 @@ function dashboardView(recipes) {
     $(newDiv).append(newLink);
     $(recipelist).append(newDiv);
   });
+}
+
+// remove recipe item from dashboard and send AJAX delete req to DB
+function deleteRecipe(element) {
+  // remove from DOM
+  let result = confirm('Delete this recipe?');
+  if (result) {
+    let divID = $(element).closest('div').attr('id');
+    $('#' + divID).remove();
+    $.ajax({
+      url: '/' + 'recipe' + '/' + divID + '/' + 'delete',
+      type: 'DELETE',
+    });
+  }
 }
