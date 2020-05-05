@@ -22,7 +22,12 @@
       </div>
       <div class="head2">
         <form action="" id="searchf">
-          <input type="text" placeholder="Enter recipe name..." name="search" />
+          <input
+            type="text"
+            onkeyup="searchDB()"
+            placeholder="Enter recipe name..."
+            id="searchdb"
+          />
           <button class="signin search">
             <i class="material-icons">search</i>
           </button>

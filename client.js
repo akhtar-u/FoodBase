@@ -36,6 +36,7 @@ function dashboardView(recipes) {
     let newDiv = document.createElement('div');
     $(newDiv).attr('class', 'recipediv');
     newDiv.setAttribute('id', recipedID);
+    $(newDiv).addClass(element.recipename);
 
     let newLink = document.createElement('a');
     $(newLink).attr('href', '/recipe/' + recipedID);
@@ -83,5 +84,26 @@ function deleteRecipe(element) {
       url: '/' + 'recipe' + '/' + divID + '/' + 'delete',
       type: 'DELETE',
     });
+  }
+}
+
+// search recipe by name / hide which don't match
+function searchDB() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('searchdb');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById('recipelist');
+  div = ul.getElementsByTagName('div');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < div.length; i++) {
+    a = div[i];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      div[i].style.display = '';
+    } else {
+      div[i].style.display = 'none';
+    }
   }
 }
