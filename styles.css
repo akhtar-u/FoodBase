@@ -149,7 +149,7 @@ body {
   justify-content: right;
 }
 
-input[name="search"] {
+input[name='search'] {
   padding: 0.5rem;
   margin-bottom: 0.25rem;
 }
@@ -164,6 +164,20 @@ input[name="search"] {
   margin-top: 0.25rem;
 }
 
+/* for diplaying user recipes in dashboard */
 .main-db {
   display: grid;
+}
+#addrec {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+#addrec a {
+  display: grid;
+  justify-content: center;
+  text-decoration: none;
+}
+#addrec p {
+  display: grid;
+  justify-content: right;
 }

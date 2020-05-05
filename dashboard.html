@@ -9,8 +9,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script src="client.js"></script>
-    <title>Dashboard</title>
+    <title id="userdb"></title>
   </head>
   <body class="body-db">
     <header class="gridheader">
@@ -35,6 +36,18 @@
         </a>
       </div>
     </header>
-    <main class="main-db">HERE GOES SOME STUFF</main>
+    <main class="main-db">
+      <div id="addrec">
+        <a href="/recform"
+          ><button class="signin" id="addrec-bt">
+            Add Recipe
+          </button>
+        </a>
+        <p>Stored recipes: 0</p>
+      </div>
+      <ul>
+        <li id="rec-1"></li>
+      </ul>
+    </main>
   </body>
 </html>
