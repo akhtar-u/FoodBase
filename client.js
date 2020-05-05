@@ -45,6 +45,29 @@ function dashboardView(recipes) {
     recipeli.setAttribute('id', recipedID);
     $(recipeli).attr('class', 'recipeli');
 
+    // add material icons and checkbox
+    // edit selected recipe <need to add jquery ajax>
+    $(newDiv).append(
+      '<a class="icona signin" href=/recipe/' +
+        recipedID +
+        '/update>' +
+        '<i class="material-icons">delete_outline</i></a> '
+    );
+
+    // delete selected recipe <need to add jquery ajax>
+    $(newDiv).append(
+      '<a class="icona signin" href=/recipe/' +
+        recipedID +
+        '/delete>' +
+        '<i class="material-icons">create</i></a> '
+    );
+
+    /* checkboxes? maybe 
+    $(newDiv).append(
+      '<div><input type="checkbox" id="scales" name="scales"><label for="scales">Publish?</label></div>'
+    );*/
+
+    // append elements
     $(newLink).append(recipeli);
     $(newDiv).append(newLink);
     $(recipelist).append(newDiv);
