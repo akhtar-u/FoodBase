@@ -42,7 +42,12 @@ app.use('/recipe', recipe);
 
 app.get('/dashboard', requiresAuth(), (req, res) => {
   res.sendFile(path.join(__dirname + '/public/dashboard.html'));
-  let userid = req.openid.user.sub;
+});
+app.get('/recform', requiresAuth(), (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/recipeform.html'));
+});
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(req.openid.user);
 });
 
 app.listen(process.env.port || 3000);
