@@ -1,24 +1,52 @@
+const URL = 'http://localhost:3000';
+
+// obtain user profile and pass parameters to get data from db
 $.ajax({
-  url: 'http://localhost:3000/profile',
+  url: '/' + 'profile',
   method: 'GET',
   success: function (data) {
     getRecipes(data.sub);
-    document.getElementById('userdb').innerHTML = data.nickname + "'s Recipes";
+    $('#usertitle').html(data.nickname + "'s Recipes");
   },
 });
 
-// query recipes using userid
+// get all recipes for current user
 function getRecipes(userid) {
   $.ajax({
-    url: 'http://localhost:3000/recipe/' + '/' + userid,
+    url: '/' + 'recipe' + '/' + userid,
     method: 'GET',
   })
     .then(function (data) {
-      let htmlstr = data;
-      console.log(htmlstr[1]);
-      $('#rec-1').html(JSON.stringify(htmlstr[0]));
+      let recipes = data;
+      let storedRecipes = recipes.length;
+      dashboardView(recipes);
+      $('#storedrec').html('Stored recipes: ' + storedRecipes);
     })
     .catch(function (err) {
       console.log(err);
     });
+}
+
+// list all recipes for user and get id of each recipe
+function dashboardView(recipes) {
+  recipes.forEach((element) => {
+    let recipedID = element._id;
+
+    // create list of recipes with delete/edit options
+    let newDiv = document.createElement('div');
+    $(newDiv).attr('class', 'recipediv');
+
+    let newLink = document.createElement('a');
+    $(newLink).attr('href', '/recipe/' + recipedID);
+    $(newLink).attr('class', 'signin');
+
+    let recipeli = document.createElement('li');
+    recipeli.innerHTML = element.recipename;
+    recipeli.setAttribute('id', recipedID);
+    $(recipeli).attr('class', 'recipeli');
+
+    $(newLink).append(recipeli);
+    $(newDiv).append(newLink);
+    $(recipelist).append(newDiv);
+  });
 }

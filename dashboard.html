@@ -11,7 +11,7 @@
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script src="client.js"></script>
-    <title id="userdb"></title>
+    <title id="usertitle"></title>
   </head>
   <body class="body-db">
     <header class="gridheader">
@@ -38,16 +38,16 @@
     </header>
     <main class="main-db">
       <div id="addrec">
-        <a href="/recform"
-          ><button class="signin" id="addrec-bt">
-            Add Recipe
-          </button>
-        </a>
-        <p>Stored recipes: 0</p>
+        <div>
+          <a href="/recform"
+            ><button class="signin addrec-bt" id="addrec-bt">
+              Add Recipe
+            </button>
+          </a>
+        </div>
+        <p id="storedrec"></p>
       </div>
-      <ul>
-        <li id="rec-1"></li>
-      </ul>
+      <ul id="recipelist"></ul>
     </main>
   </body>
 </html>
