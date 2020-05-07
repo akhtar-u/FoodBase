@@ -138,10 +138,9 @@ function addItem() {
   $('#ing-div').append(newInput);
 }
 
-// submit form and add userid
+// submit form
 $('#addform').submit(function (e) {
   e.preventDefault();
-
   $.ajax({
     type: 'POST',
     url: '/' + 'recipe' + '/' + 'add',
@@ -150,4 +149,41 @@ $('#addform').submit(function (e) {
       location.href = 'https://http://localhost:3000/dashboard';
     },
   });
+});
+
+// image upload widget through cloudinary
+$(document).ready(function () {
+  document.getElementById('upload_widget').addEventListener(
+    'click',
+    function () {
+      document.getElementById('upload_widget').disabled = true;
+
+      cloudinary.openUploadWidget(
+        {
+          cloud_name: 'dnemvvifx',
+          sources: [
+            'local',
+            'url',
+            'camera',
+            'image_search',
+            'facebook',
+            'dropbox',
+            'google_photos',
+          ],
+          upload_preset: 'ml_default',
+          thumbnails: '.feature_thumb',
+          thumbnailTransformation: [{ width: 3000, height: 300, crop: 'fit' }],
+          return_delete_token: true,
+          multiple: false,
+        },
+        (error, result) => {
+          if (result.event === 'success') {
+            $('#image-url').attr('value', result.info.secure_url);
+          }
+        }
+      );
+    },
+    false
+  );
+  $('.cloudinary-delete').attr('color', 'white');
 });

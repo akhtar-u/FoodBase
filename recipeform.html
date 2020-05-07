@@ -10,6 +10,8 @@
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
+      
     <script src="client.js"></script>
     <title>Add a new recipe</title>
   </head>
@@ -44,8 +46,9 @@
           <input name='userid' type="hidden" value= required id='userid-input'>
 
           <label ><b>Choose Image: </b></label>
-          <input name='image' id="img-choose" type="file" accept="image/*" onchange="previewImg(event)" required>
-          <img id="img-upload"/>
+          <button href="#" id="upload_widget" class='signin'>Upload image</button>
+          <input name='image' type="hidden" value= required id='image-url'>
+          <div class="feature_thumb"/></div>          
         
           <label ><b>Ingredients: </b></label> 
 
@@ -62,9 +65,9 @@
           <textarea name='instructions' type="text" placeholder="Enter Instructions" id="ins-input" required></textarea>
           
           <label><b>Make Recipe Public? </b></label>
-          <select id="public">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>        
+          <select name='public' id="public">
+            <option value="yes">yes</option>
+            <option value="no">no</option>        
           </select>           
           
           <div class="submitbtn">
@@ -76,5 +79,6 @@
           </div>  
       </form>   
   </main>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   </body>
 </html>
