@@ -12,7 +12,7 @@ exports.recipe_add = (req, res) => {
 
   recipe
     .save()
-    .then(() => res.json('Recipe Added!'))
+    .then(() => res.redirect('/dashboard'))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 
@@ -32,7 +32,7 @@ exports.recipe_update = (req, res) => {
 
 // delete a recipe
 exports.recipe_delete = (req, res) => {
-  Recipe.findOneAndDelete(req.params.id)
+  Recipe.findByIdAndDelete(req.params.id)
     .then((recipe) => res.json('Recipe Deleted'))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
