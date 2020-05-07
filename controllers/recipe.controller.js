@@ -8,6 +8,7 @@ exports.recipe_add = (req, res) => {
     image: req.body.image,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
+    public: req.body.public,
   });
 
   recipe
