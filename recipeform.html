@@ -11,7 +11,68 @@
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script src="client.js"></script>
-    <title>Add Recipe</title>
+    <title>Add a new recipe</title>
   </head>
-  <body></body>
+  <body>
+    <body class="body-form">
+      <header class="gridheader">
+        <div class="head1">
+          <button class="signin browse" id="browse">
+            Browse
+          </button>
+        </div>
+        <div class="head2">
+          <a href="/dashboard"
+            ><button class="signin" id="signin">
+              Dashboard
+            </button>
+          </a>
+        </div>
+        <div class="head3">
+          <a href="/logout"
+            ><button class="signin signout" id="signout">
+              Sign Out
+            </button>
+          </a>
+        </div>
+      </header>
+      <main class="main-form">       
+        <form action="" id='addform'>
+        <label ><b>Recipe Name: </b></label>
+        <input type="text" placeholder="Enter Recipe Name" id='rec-name' required>
+
+        <label ><b>Choose Image: </b></label>
+        <input id="img-choose" type="file" accept="image/*" onchange="previewImg(event)" required>
+        <img id="img-upload"/>
+       
+        <label ><b>Ingredients: </b></label> 
+
+        <div id='ing-div'>             
+        <input type="text" placeholder="" id='ing' class='item' required>
+        </div>
+
+        <div id="ing-btn-div">
+        <a class="signin icona" id='addrec-btn' onclick="addItem()">
+          <i class="material-icons"id='add-icon'>add</i></a>
+        </div>
+        
+        <label id="instruction"><b>Instructions: </b></label>
+        <textarea type="text" placeholder="Enter Instructions" id="ins-input" required></textarea>
+        
+        <label><b>Make Recipe Public? </b></label>
+        <select id="public">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>        
+        </select>           
+        
+        <div class="submitbtn">
+        <a href="/dashboard">
+          <button class="signin submit" id="submit">
+              Submit
+            </button>
+          </a>
+        </div>  
+        </form>   
+  </main>
+  </body>
 </html>

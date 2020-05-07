@@ -151,6 +151,11 @@ body {
 #searchdb {
   padding: 0.5rem;
   margin-bottom: 0.25rem;
+  color: white;
+  border: 2px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+  font-size: 1rem;
 }
 
 .search {
@@ -161,6 +166,10 @@ body {
 }
 #searchf {
   margin-top: 0.25rem;
+}
+
+#search-icon {
+  vertical-align: middle;
 }
 
 /* for diplaying user recipes in dashboard */
@@ -196,9 +205,13 @@ ul {
 .recipediv {
   display: grid;
   justify-content: center;
-  grid-template-columns: 0.25fr 0.25fr 2fr;
+  grid-template-columns: 0.2fr 0.2fr 0.2fr 2fr;
   padding: 0.5rem;
   font-size: 2rem;
+}
+
+#rec-date {
+  font-size: 1rem;
 }
 
 label {
@@ -217,4 +230,113 @@ li {
 
 i {
   margin-top: 0.25rem;
+}
+
+/* recipe addition form layout */
+
+#addform {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 55%;
+}
+
+.submitbtn {
+  display: grid;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.main-form label {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.main-form input,
+textarea {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+}
+
+::placeholder {
+  color: white;
+  font-family: myFont;
+}
+
+input[type='text']:focus {
+  border: 3px solid var(--main-color);
+}
+textarea[type='text']:focus {
+  border: 3px solid var(--main-color);
+}
+textarea {
+  resize: none;
+  height: 8rem;
+  font-size: 1.25rem;
+}
+
+select {
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+  font-family: myFont;
+  width: 6rem;
+}
+select:focus {
+  border: 3px solid var(--main-color);
+}
+
+#img-choose {
+  font-family: myFont;
+}
+
+#img-upload {
+  margin: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+#ing-div {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 75%;
+}
+
+#ing {
+  border-radius: unset;
+  border-top: hidden;
+  border-right: hidden;
+  border-left: hidden;
+  width: 10rem;
+}
+
+.item {
+  margin: 0.5rem;
+}
+
+#add-icon {
+  font-size: 3rem;
+}
+
+#addrec-btn {
+  margin-top: 0.5rem;
+  padding: 0rem;
+}
+
+#ing-btn-div {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto;
+  align-items: center;
+}
+
+#ing-div {
+  display: grid;
+  grid-template-columns: auto auto auto;
 }

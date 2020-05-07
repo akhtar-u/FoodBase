@@ -1,5 +1,3 @@
-const URL = 'http://localhost:3000';
-
 // obtain user profile and pass parameters to get data from db
 $.ajax({
   url: '/' + 'profile',
@@ -19,8 +17,11 @@ function getRecipes(userid) {
     .then(function (data) {
       let recipes = data;
       let storedRecipes = recipes.length;
-      dashboardView(recipes);
-      $('#storedrec').html('Stored recipes: ' + storedRecipes);
+      // check if on dashboard
+      if (window.location.href == 'http://localhost:3000/dashboard') {
+        dashboardView(recipes);
+        $('#storedrec').html('Stored recipes: ' + storedRecipes);
+      }
     })
     .catch(function (err) {
       console.log(err);
@@ -31,6 +32,7 @@ function getRecipes(userid) {
 function dashboardView(recipes) {
   recipes.forEach((element) => {
     let recipedID = element._id;
+    let recipeDate = element.createdAt;
 
     // create list of recipes with delete/edit options
     let newDiv = document.createElement('div');
@@ -46,6 +48,10 @@ function dashboardView(recipes) {
     recipeli.innerHTML = element.recipename;
     $(recipeli).attr('class', 'recipeli');
 
+    $(newDiv).append(
+      '<p id="rec-date">' + recipeDate.substring(0, 10) + '</p>'
+    );
+
     // add material icons and checkbox
     // delete selected recipe <need to add jquery ajax>
     $(newDiv).append(
@@ -58,13 +64,8 @@ function dashboardView(recipes) {
       '<a class="icona signin" href=/recipe/' +
         recipedID +
         '/update>' +
-        '<i class="material-icons">create</i></a> '
+        '<i class="material-icons">create</i></a>'
     );
-
-    /* checkboxes? maybe 
-    $(newDiv).append(
-      '<div><input type="checkbox" id="scales" name="scales"><label for="scales">Publish?</label></div>'
-    );*/
 
     // append elements
     $(newLink).append(recipeli);
@@ -106,4 +107,22 @@ function searchDB() {
       div[i].style.display = 'none';
     }
   }
+}
+
+// image preview for adding a new recipe
+function previewImg(event) {
+  let imgUpload = document.getElementById('img-upload');
+  imgUpload.src = URL.createObjectURL(event.target.files[0]);
+  imgUpload.onload = function () {
+    URL.revokeObjectURL(output.src); // free memory
+  };
+}
+
+// add input for another ingredient
+function addItem() {
+  let newInput = document.createElement('input');
+  $(newInput).attr('class', 'item');
+  $(newInput).attr('id', 'ing');
+
+  $('#ing-div').append(newInput);
 }
