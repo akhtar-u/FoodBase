@@ -3,7 +3,11 @@ $.ajax({
   url: '/' + 'profile',
   method: 'GET',
   success: function (data) {
-    getRecipes(data.sub);
+    userid = data.sub;
+
+    $('#userid-input').attr('value', userid);
+    getRecipes(userid);
+
     $('#usertitle').html(data.nickname + "'s Recipes");
   },
 });
@@ -80,6 +84,12 @@ function deleteRecipe(element) {
   let result = confirm('Delete this recipe?');
   if (result) {
     let divID = $(element).closest('div').attr('id');
+    let storedRec = $('#storedrec').text();
+    let count = parseInt(storedRec.substring(16, storedRec.length));
+
+    count--;
+    $('#storedrec').text('Stored recipes: ' + count);
+
     $('#' + divID).remove();
     $.ajax({
       url: '/' + 'recipe' + '/' + divID + '/' + 'delete',
@@ -114,7 +124,7 @@ function previewImg(event) {
   let imgUpload = document.getElementById('img-upload');
   imgUpload.src = URL.createObjectURL(event.target.files[0]);
   imgUpload.onload = function () {
-    URL.revokeObjectURL(output.src); // free memory
+    URL.revokeObjectURL(imgUpload.src); // free memory
   };
 }
 
@@ -123,6 +133,21 @@ function addItem() {
   let newInput = document.createElement('input');
   $(newInput).attr('class', 'item');
   $(newInput).attr('id', 'ing');
+  $(newInput).attr('name', 'ingredients');
 
   $('#ing-div').append(newInput);
 }
+
+// submit form and add userid
+$('#addform').submit(function (e) {
+  e.preventDefault();
+
+  $.ajax({
+    type: 'POST',
+    url: '/' + 'recipe' + '/' + 'add',
+    data: form.serialize(),
+    success: function () {
+      location.href = 'https://http://localhost:3000/dashboard';
+    },
+  });
+});

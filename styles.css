@@ -340,3 +340,8 @@ select:focus {
   display: grid;
   grid-template-columns: auto auto auto;
 }
+
+input,
+textarea {
+  font-family: myFont;
+}
