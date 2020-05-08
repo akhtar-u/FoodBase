@@ -212,6 +212,8 @@ ul {
 
 #rec-date {
   font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem;
 }
 
 label {
@@ -226,6 +228,7 @@ li {
 .icona {
   display: flex;
   justify-content: center;
+  vertical-align: center;
 }
 
 i {
@@ -390,26 +393,57 @@ textarea {
 
 /* Modal Content/Box */
 .modal-content {
+  display: grid;
+  justify-content: center;
+  text-align: center;
   background-color: var(--main-color);
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 6px;
-  width: 80%; /* Could be more or less, depending on screen size */
+  margin: 2% auto; /* 15% from the top and centered */
+  border: 4px solid white;
+  border-radius: 8px;
+  width: 60%; /* Could be more or less, depending on screen size */
   word-break: break-all;
+  padding: 0.5rem;
+  overflow: auto;
+}
+.modal-title {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0.5rem;
 }
 
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal-image {
+  width: 80%;
+  border: 2px solid white;
+  border-radius: 8px;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.modal-instructions {
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.modal-ingredients {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto;
+  column-gap: 5rem;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.modal-ingredients > li {
+  padding: 0.25rem;
+}
+
+#ing-title {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+#inst-title {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.5rem;
 }

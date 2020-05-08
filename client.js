@@ -1,26 +1,23 @@
-const URLdb = 'http://localhost:3000/dashboard';
 const URLform = 'http://localhost:3000/recform';
 
 // obtain user profile and pass parameters to get data from db
-if (window.location.href == URLdb) {
-  $.ajax({
-    url: '/' + 'profile',
-    method: 'GET',
-    success: function (data) {
-      let userid = data.sub;
-      let emailVerified = data.email_verified;
+$.ajax({
+  url: '/' + 'profile',
+  method: 'GET',
+  success: function (data) {
+    let userid = data.sub;
+    let emailVerified = data.email_verified;
 
-      if (emailVerified == true) {
-        $('#userid-input').attr('value', userid);
-        getRecipes(userid);
-      } else {
-        verify();
-      }
+    if (emailVerified == true) {
+      $('#userid-input').attr('value', userid);
+      getRecipes(userid);
+    } else {
+      verify();
+    }
 
-      $('#usertitle').html(data.nickname + "'s Recipes");
-    },
-  });
-}
+    $('#usertitle').html(data.nickname + "'s Recipes");
+  },
+});
 
 // get all recipes for current user
 function getRecipes(userid) {
@@ -136,6 +133,7 @@ function addItem() {
   $(newInput).attr('class', 'item');
   $(newInput).attr('id', 'ing');
   $(newInput).attr('name', 'ingredients');
+  $(newInput).attr('value', '');
 
   $('#ing-div').append(newInput);
 }
@@ -200,23 +198,29 @@ function fetchRecipe() {
     url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
     method: 'GET',
     success: function (data) {
-      let recipeData = JSON.stringify(data);
       let modal = document.getElementById('myModal');
-      let span = document.getElementsByClassName('close')[0];
+
+      // get array of ingredients
+      let ingList = data.ingredients;
+
+      ingList.forEach(appendIng);
+      function appendIng(item) {
+        $('.modal-ingredients').append('<li>' + item + '</li>');
+      }
+
       // set modal content to recipe data
-      $('.modal-content').html(recipeData);
+      $('.modal-title').text(data.recipename);
+      $('.modal-image').attr('src', data.image);
+      $('.modal-instructions').text(data.instructions);
 
       // display modal when recipe clicked
       modal.style.display = 'block';
 
-      // close modal if they click outside or on the X
-      span.onclick = function () {
-        modal.style.display = 'none';
-      };
-
       window.onclick = function (event) {
         if (event.target == modal) {
           modal.style.display = 'none';
+          $('.modal-image').attr('src', '');
+          $('.modal-ingredients').empty();
         }
       };
     },
