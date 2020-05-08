@@ -57,14 +57,11 @@ function dashboardView(recipes) {
     newDiv.setAttribute('id', recipedID);
     $(newDiv).addClass(element.recipename);
 
-    let newLink = document.createElement('a');
-    $(newLink).attr('class', 'signin');
-    $(newLink).attr('id', recipedID);
-    $(newLink).on('click', fetchRecipe);
-
-    let recipeli = document.createElement('li');
-    recipeli.innerHTML = element.recipename;
-    $(recipeli).attr('class', 'recipeli');
+    let newButton = document.createElement('a');
+    $(newButton).attr('class', 'signin reclink');
+    $(newButton).attr('id', recipedID);
+    $(newButton).on('click', fetchRecipe);
+    newButton.innerHTML = element.recipename;
 
     $(newDiv).append(
       '<p id="rec-date">' + recipeDate.substring(0, 10) + '</p>'
@@ -86,8 +83,8 @@ function dashboardView(recipes) {
     );
 
     // append elements
-    $(newLink).append(recipeli);
-    $(newDiv).append(newLink);
+
+    $(newDiv).append(newButton);
     $(recipelist).append(newDiv);
   });
 }
@@ -194,7 +191,34 @@ if (window.location.href == URLform) {
   });
 }
 
-// fetch recipe when clicked from dashboard and show popup
+// fetch recipe when clicked from dashboard and generate recipe modal
 function fetchRecipe() {
   let recipeID = this.id;
+
+  // get recipe data for selected recipe
+  $.ajax({
+    url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
+    method: 'GET',
+    success: function (data) {
+      let recipeData = JSON.stringify(data);
+      let modal = document.getElementById('myModal');
+      let span = document.getElementsByClassName('close')[0];
+      // set modal content to recipe data
+      $('.modal-content').html(recipeData);
+
+      // display modal when recipe clicked
+      modal.style.display = 'block';
+
+      // close modal if they click outside or on the X
+      span.onclick = function () {
+        modal.style.display = 'none';
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      };
+    },
+  });
 }
