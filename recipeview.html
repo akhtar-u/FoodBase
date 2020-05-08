@@ -13,5 +13,31 @@
     <script src="client.js"></script>
     <title>Recipe Name</title>
   </head>
-  <body></body>
+  <body>
+    <header class="gridheader">
+      <div class="head1">
+        <button class="signin browse" id="browse">
+          Browse
+        </button>
+      </div>
+      <div class="head2">
+        <a href="/dashboard"
+          ><button class="signin" id="signin">
+            Dashboard
+          </button>
+        </a>
+      </div>
+      <div class="head3">
+        <a href="/logout"
+          ><button class="signin signout" id="signout">
+            Sign Out
+          </button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div id="main-rec-view"></div>
+    </main>
+  </body>
 </html>

@@ -1,16 +1,26 @@
+const URLdb = 'http://localhost:3000/dashboard';
+const URLform = 'http://localhost:3000/recform';
+
 // obtain user profile and pass parameters to get data from db
-$.ajax({
-  url: '/' + 'profile',
-  method: 'GET',
-  success: function (data) {
-    userid = data.sub;
+if (window.location.href == URLdb) {
+  $.ajax({
+    url: '/' + 'profile',
+    method: 'GET',
+    success: function (data) {
+      let userid = data.sub;
+      let emailVerified = data.email_verified;
 
-    $('#userid-input').attr('value', userid);
-    getRecipes(userid);
+      if (emailVerified == true) {
+        $('#userid-input').attr('value', userid);
+        getRecipes(userid);
+      } else {
+        verify();
+      }
 
-    $('#usertitle').html(data.nickname + "'s Recipes");
-  },
-});
+      $('#usertitle').html(data.nickname + "'s Recipes");
+    },
+  });
+}
 
 // get all recipes for current user
 function getRecipes(userid) {
@@ -21,15 +31,18 @@ function getRecipes(userid) {
     .then(function (data) {
       let recipes = data;
       let storedRecipes = recipes.length;
-      // check if on dashboard
-      if (window.location.href == 'http://localhost:3000/dashboard') {
-        dashboardView(recipes);
-        $('#storedrec').html('Stored recipes: ' + storedRecipes);
-      }
+
+      dashboardView(recipes);
+      $('#storedrec').html('Stored recipes: ' + storedRecipes);
     })
     .catch(function (err) {
       console.log(err);
     });
+}
+
+// ask user to verify email before being able to use website
+function verify() {
+  $('.main-db').html('Please verify your email!');
 }
 
 // list all recipes for user and get id of each recipe
@@ -45,8 +58,9 @@ function dashboardView(recipes) {
     $(newDiv).addClass(element.recipename);
 
     let newLink = document.createElement('a');
-    $(newLink).attr('href', '/recipe/' + recipedID);
     $(newLink).attr('class', 'signin');
+    $(newLink).attr('id', recipedID);
+    $(newLink).on('click', fetchRecipe);
 
     let recipeli = document.createElement('li');
     recipeli.innerHTML = element.recipename;
@@ -101,7 +115,7 @@ function deleteRecipe(element) {
 // search recipe by name / hide which don't match
 function searchDB() {
   // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
+  var input, filter, ul, a, i, txtValue;
   input = document.getElementById('searchdb');
   filter = input.value.toUpperCase();
   ul = document.getElementById('recipelist');
@@ -117,15 +131,6 @@ function searchDB() {
       div[i].style.display = 'none';
     }
   }
-}
-
-// image preview for adding a new recipe
-function previewImg(event) {
-  let imgUpload = document.getElementById('img-upload');
-  imgUpload.src = URL.createObjectURL(event.target.files[0]);
-  imgUpload.onload = function () {
-    URL.revokeObjectURL(imgUpload.src); // free memory
-  };
 }
 
 // add input for another ingredient
@@ -145,45 +150,51 @@ $('#addform').submit(function (e) {
     type: 'POST',
     url: '/' + 'recipe' + '/' + 'add',
     data: form.serialize(),
-    success: function () {
-      location.href = 'https://http://localhost:3000/dashboard';
-    },
   });
 });
 
 // image upload widget through cloudinary
-$(document).ready(function () {
-  document.getElementById('upload_widget').addEventListener(
-    'click',
-    function () {
-      document.getElementById('upload_widget').disabled = true;
+if (window.location.href == URLform) {
+  $(document).ready(function () {
+    document.getElementById('upload_widget').addEventListener(
+      'click',
+      function () {
+        document.getElementById('upload_widget').disabled = true;
 
-      cloudinary.openUploadWidget(
-        {
-          cloud_name: 'dnemvvifx',
-          sources: [
-            'local',
-            'url',
-            'camera',
-            'image_search',
-            'facebook',
-            'dropbox',
-            'google_photos',
-          ],
-          upload_preset: 'ml_default',
-          thumbnails: '.feature_thumb',
-          thumbnailTransformation: [{ width: 3000, height: 300, crop: 'fit' }],
-          return_delete_token: true,
-          multiple: false,
-        },
-        (error, result) => {
-          if (result.event === 'success') {
-            $('#image-url').attr('value', result.info.secure_url);
+        cloudinary.openUploadWidget(
+          {
+            cloud_name: 'dnemvvifx',
+            sources: [
+              'local',
+              'url',
+              'camera',
+              'image_search',
+              'facebook',
+              'dropbox',
+              'google_photos',
+            ],
+            upload_preset: 'ml_default',
+            thumbnails: '.feature_thumb',
+            thumbnailTransformation: [
+              { width: 3000, height: 300, crop: 'fit' },
+            ],
+            return_delete_token: true,
+            multiple: false,
+          },
+          (error, result) => {
+            if (result.event === 'success') {
+              $('#image-url').attr('value', result.info.secure_url);
+            }
           }
-        }
-      );
-    },
-    false
-  );
-  $('.cloudinary-delete').attr('color', 'white');
-});
+        );
+      },
+      false
+    );
+    $('.cloudinary-delete').attr('color', 'white');
+  });
+}
+
+// fetch recipe when clicked from dashboard and show popup
+function fetchRecipe() {
+  let recipeID = this.id;
+}
