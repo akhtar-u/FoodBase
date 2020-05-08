@@ -53,13 +53,19 @@
           <label ><b>Ingredients: </b></label> 
 
           <div id='ing-div'>             
-          <input name='ingredients' type="text" placeholder="" id='ing' class='item' required>
+          <input name='ingredients' type="text" placeholder="" id='ingperm' class='item' required>
           </div>
 
+          <div class='addremove'>
           <div id="ing-btn-div">
           <a class="signin icona" id='addrec-btn' onclick="addItem()">
             <i class="material-icons"id='add-icon'>add</i></a>
           </div>
+          <div id="ing-btn-div">
+            <a class="signin icona" id='addrec-btn' onclick="removeItem()">
+              <i class="material-icons"id='add-icon'>remove</i></a>
+          </div>
+        </div>
           
           <label id="instruction"><b>Instructions: </b></label>
           <textarea name='instructions' type="text" placeholder="Enter Instructions" id="ins-input" required></textarea>

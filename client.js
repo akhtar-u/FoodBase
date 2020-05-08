@@ -133,9 +133,14 @@ function addItem() {
   $(newInput).attr('class', 'item');
   $(newInput).attr('id', 'ing');
   $(newInput).attr('name', 'ingredients');
-  $(newInput).attr('value', '');
+  $(newInput).attr('required', true);
 
   $('#ing-div').append(newInput);
+}
+
+// remove extra input
+function removeItem() {
+  $('#ing').remove();
 }
 
 // submit form

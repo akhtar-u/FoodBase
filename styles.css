@@ -323,6 +323,14 @@ select:focus {
   width: 10rem;
 }
 
+#ingperm {
+  border-radius: unset;
+  border-top: hidden;
+  border-right: hidden;
+  border-left: hidden;
+  width: 10rem;
+}
+
 .item {
   margin: 0.5rem;
 }
@@ -373,6 +381,12 @@ textarea {
 
 #upload_widget:disabled {
   cursor: not-allowed;
+}
+
+.addremove {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto;
 }
 
 /* modal popup styling - taken from W3Schools*/
