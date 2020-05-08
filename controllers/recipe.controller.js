@@ -17,9 +17,16 @@ exports.recipe_add = (req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 
-// fetch recipe
-exports.recipe_view = (req, res) => {
+// fetch recipes by userid
+exports.recipes_list = (req, res) => {
   Recipe.find({ userid: req.params.id })
+    .then((recipe) => res.json(recipe))
+    .catch((err) => res.status(400).json('Error: ' + err));
+};
+
+// fetch recipe by id
+exports.recipe_view = (req, res) => {
+  Recipe.findById(req.params.id)
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(400).json('Error: ' + err));
 };

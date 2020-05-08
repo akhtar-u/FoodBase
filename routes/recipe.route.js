@@ -5,8 +5,11 @@ const recipe_controller = require('../controllers/recipe.controller');
 // adding a new recipe
 router.post('/add', recipe_controller.recipe_add);
 
-// fetch recipe
-router.get('/:id', recipe_controller.recipe_view);
+// fetch all recipes by userid
+router.get('/:id', recipe_controller.recipes_list);
+
+// fetch a recipes by id
+router.get('/:id/view', recipe_controller.recipe_view);
 
 // update recipe
 router.put('/:id/update', recipe_controller.recipe_update);

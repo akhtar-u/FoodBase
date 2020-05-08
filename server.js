@@ -46,6 +46,9 @@ app.get('/dashboard', requiresAuth(), (req, res) => {
 app.get('/recform', requiresAuth(), (req, res) => {
   res.sendFile(path.join(__dirname + '/public/recipeform.html'));
 });
+app.get('/recview', requiresAuth(), (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/recipeview.html'));
+});
 app.get('/profile', requiresAuth(), (req, res) => {
   res.send(req.openid.user);
 });
