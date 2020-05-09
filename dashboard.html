@@ -16,9 +16,11 @@
   <body class="body-db">
     <header class="gridheader">
       <div class="head1">
-        <button class="signin browse" id="browse">
-          Browse
-        </button>
+        <a href='/browse'>
+          <button class="signin browse" id="browse">
+            Browse
+          </button>
+        </a>
       </div>
       <div class="head2">
         <form action="" id="searchf">
@@ -81,6 +83,7 @@
   
             <input name='userid' type="hidden" value='' required id='userid-input'>
             <input name='_id' type="hidden" value='' required id='id-input'>
+            <input name='nickname' type="hidden" value='' required id='nick-input'>             
   
             <label ><b>Choose Image: </b></label>
             <button href="#" id="upload_widget" class='signin'>Upload image</button>

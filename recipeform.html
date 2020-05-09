@@ -19,13 +19,15 @@
     <body class="body-form">
       <header class="gridheader">
         <div class="head1">
-          <button class="signin browse" id="browse">
-            Browse
-          </button>
+          <a href="/browse"
+            ><button class="signin browse" id="browse">
+              Browse
+            </button>
+          </a>
         </div>
         <div class="head2">
           <a href="/dashboard"
-            ><button class="signin" id="signin">
+            ><button class="signin dashboard" id="dashboard">
               Dashboard
             </button>
           </a>
@@ -43,7 +45,8 @@
           <label><b>Recipe Name: </b></label>
           <input name='recipename' type="text" placeholder="Enter Recipe Name" id='rec-name' required>
 
-          <input name='userid' type="hidden" value= required id='userid-input'>
+          <input name='userid' type="hidden" value= required id='userid-input'> 
+          <input name='nickname' type="hidden" value='' required id='nick-input'>        
 
           <label ><b>Choose Image: </b></label>
           <button href="#" id="upload_widget" class='signin'>Upload image</button>

@@ -8,6 +8,7 @@ $.ajax({
 
     if (emailVerified == true) {
       $('#userid-input').attr('value', userid);
+      $('#nick-input').val(data.nickname);
       getRecipes(userid);
     } else {
       verify();
@@ -307,3 +308,12 @@ function editRecipe(element) {
     },
   });
 }
+
+// get all public recipes and display on /browse
+$.ajax({
+  url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
+  method: 'GET',
+  success: function (data) {
+    $('#main-browse').html(JSON.stringify(data));
+  },
+});
