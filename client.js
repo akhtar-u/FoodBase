@@ -310,10 +310,12 @@ function editRecipe(element) {
 }
 
 // get all public recipes and display on /browse
-$.ajax({
+/* $.ajax({
   url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
   method: 'GET',
   success: function (data) {
     $('#main-browse').html(JSON.stringify(data));
   },
 });
+
+*/
