@@ -8,6 +8,7 @@ exports.recipe_add = (req, res) => {
     image: req.body.image,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
+    nickname: req.body.nickname,
     public: req.body.public,
   });
 
@@ -17,11 +18,20 @@ exports.recipe_add = (req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 
-// use mongoose find* to only return name, instructions, image, public
-
 // fetch recipes by userid
 exports.recipes_list = (req, res) => {
   Recipe.find({ userid: req.params.id })
+    .then((recipe) => res.json(recipe))
+    .catch((err) => res.status(400).json('Error: ' + err));
+};
+
+// fetch all recipes that are public
+// only return: recipename, instructions, image, date and nickname
+exports.recipe_public = (req, res) => {
+  Recipe.find(
+    { public: req.params.id },
+    'recipename image nickname ingredients instructions createdAt public -_id'
+  )
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
@@ -36,7 +46,7 @@ exports.recipe_view = (req, res) => {
 // update a recipe
 exports.recipe_update = (req, res) => {
   Recipe.findByIdAndUpdate(req.params.id, { $set: req.body })
-    .then((recipe) => res.json('Recipe Updated'))
+    .then((recipe) => res.redirect(303, '/dashboard'))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 

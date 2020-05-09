@@ -8,6 +8,7 @@ let RecipeSchema = new Schema(
     image: { type: String, required: true },
     ingredients: [{ type: String, required: true }],
     instructions: { type: String, required: true },
+    nickname: { type: String, required: true },
     public: { type: Boolean, required: true },
   },
   {
