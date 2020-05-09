@@ -51,6 +51,7 @@
         <p id="storedrec"></p>
       </div>
       <ul id="recipelist"></ul>
+      <!--modal for recipe-->
       <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
@@ -70,6 +71,59 @@
           </div>
         </div>
       </div>
+      <!--modal for editing-->
+      <div id="editModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-editing">
+          <form action="" id='editform'>
+            <label><b>Recipe Name: </b></label>
+            <input name='recipename' type="text" placeholder="Enter Recipe Name" id='rec-name' required>
+  
+            <input name='userid' type="hidden" value='' required id='userid-input'>
+            <input name='_id' type="hidden" value='' required id='id-input'>
+  
+            <label ><b>Choose Image: </b></label>
+            <button href="#" id="upload_widget" class='signin'>Upload image</button>
+            <input name='image' type="hidden" value='' id='image-url' required>
+            <img id="currentimage" src="" />
+            <div class="feature_thumb"/></div>          
+          
+            <label ><b>Ingredients: </b></label> 
+  
+            <div id='ing-div'>          
+            </div>
+  
+            <div class='addremove'>
+            <div id="ing-btn-div">
+            <a class="signin icona" id='addrec-btn' onclick="addItem()">
+              <i class="material-icons"id='add-icon'>add</i></a>
+            </div>
+            <div id="ing-btn-div">
+              <a class="signin icona" id='addrec-btn' onclick="removeItem()">
+                <i class="material-icons"id='add-icon'>remove</i></a>
+            </div>
+            </div>
+            
+            <label id="instruction"><b>Instructions: </b></label>
+            <textarea name='instructions' type="text" placeholder="Enter Instructions" id="ins-input" required></textarea>
+            
+            <label><b>Make Recipe Public? </b></label>
+            <select name='public' id="public">
+              <option value="yes">yes</option>
+              <option value="no">no</option>        
+            </select>           
+            
+            <div class="submitbtn">
+            <a>
+              <button class="signin submit" id="submit" type="button">
+                  Submit
+                </button>
+              </a>
+            </div>  
+        </form>
+        </div>
+      </div>
     </main>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   </body>
 </html>

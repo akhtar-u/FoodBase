@@ -1,5 +1,3 @@
-const URLform = 'http://localhost:3000/recform';
-
 // obtain user profile and pass parameters to get data from db
 $.ajax({
   url: '/' + 'profile',
@@ -65,22 +63,19 @@ function dashboardView(recipes) {
     );
 
     // add material icons and checkbox
-    // delete selected recipe <need to add jquery ajax>
+    // delete selected recipe
     $(newDiv).append(
       '<a class="icona signin" onclick=deleteRecipe(this)>' +
         '<i class="material-icons">delete_outline</i></a> '
     );
 
-    // edit selected recipe <need to add jquery ajax>
+    // edit selected recipe
     $(newDiv).append(
-      '<a class="icona signin" href=/recipe/' +
-        recipedID +
-        '/update>' +
+      '<a class="icona signin" onclick=editRecipe(this)>' +
         '<i class="material-icons">create</i></a>'
     );
 
     // append elements
-
     $(newDiv).append(newButton);
     $(recipelist).append(newDiv);
   });
@@ -143,7 +138,7 @@ function removeItem() {
   $('#ing').remove();
 }
 
-// submit form
+// submit form to add a new recipe
 $('#addform').submit(function (e) {
   e.preventDefault();
   $.ajax({
@@ -154,45 +149,41 @@ $('#addform').submit(function (e) {
 });
 
 // image upload widget through cloudinary
-if (window.location.href == URLform) {
-  $(document).ready(function () {
-    document.getElementById('upload_widget').addEventListener(
-      'click',
-      function () {
-        document.getElementById('upload_widget').disabled = true;
+$(document).ready(function () {
+  document.getElementById('upload_widget').addEventListener(
+    'click',
+    function () {
+      document.getElementById('upload_widget').disabled = true;
 
-        cloudinary.openUploadWidget(
-          {
-            cloud_name: 'dnemvvifx',
-            sources: [
-              'local',
-              'url',
-              'camera',
-              'image_search',
-              'facebook',
-              'dropbox',
-              'google_photos',
-            ],
-            upload_preset: 'ml_default',
-            thumbnails: '.feature_thumb',
-            thumbnailTransformation: [
-              { width: 3000, height: 300, crop: 'fit' },
-            ],
-            return_delete_token: true,
-            multiple: false,
-          },
-          (error, result) => {
-            if (result.event === 'success') {
-              $('#image-url').attr('value', result.info.secure_url);
-            }
+      cloudinary.openUploadWidget(
+        {
+          cloud_name: 'dnemvvifx',
+          sources: [
+            'local',
+            'url',
+            'camera',
+            'image_search',
+            'facebook',
+            'dropbox',
+            'google_photos',
+          ],
+          upload_preset: 'ml_default',
+          thumbnails: '.feature_thumb',
+          thumbnailTransformation: [{ width: 3000, height: 300, crop: 'fit' }],
+          return_delete_token: true,
+          multiple: false,
+        },
+        (error, result) => {
+          if (result.event === 'success') {
+            $('#image-url').attr('value', result.info.secure_url);
           }
-        );
-      },
-      false
-    );
-    $('.cloudinary-delete').attr('color', 'white');
-  });
-}
+        }
+      );
+    },
+    false
+  );
+  $('.cloudinary-delete').attr('color', 'white');
+});
 
 // fetch recipe when clicked from dashboard and generate recipe modal
 function fetchRecipe() {
@@ -221,11 +212,83 @@ function fetchRecipe() {
       // display modal when recipe clicked
       modal.style.display = 'block';
 
+      // close modal and clear previous entries
       window.onclick = function (event) {
         if (event.target == modal) {
           modal.style.display = 'none';
           $('.modal-image').attr('src', '');
           $('.modal-ingredients').empty();
+        }
+      };
+    },
+  });
+}
+
+// fetch recipe when clicked from dashboard and generate edit form
+function editRecipe(element) {
+  let recipeID = $(element).closest('div').attr('id');
+
+  // get recipe data for selected recipe
+  $.ajax({
+    url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
+    method: 'GET',
+    success: function (data) {
+      let modal = document.getElementById('editModal');
+
+      // get array of ingredients
+      let ingList = data.ingredients;
+
+      ingList.forEach(appendIng);
+      function appendIng(item) {
+        $('#ing-div').append(
+          "<input name='ingredients' type='text' placeholder='' id='ingperm'" +
+            "class='item' value=" +
+            item +
+            ' required>'
+        );
+      }
+
+      $('#rec-name').val(data.recipename);
+      $('#currentimage').attr('src', data.image);
+      $('#ins-input').text(data.instructions);
+      $('#id-input').val(data._id);
+      $('#editform').attr(
+        'action',
+        '/' + 'recipe' + '/' + $('#id-input').val() + '/' + 'update'
+      );
+
+      if (data.public == false) {
+        $('#public').val('no');
+      }
+
+      if ($('#image-url').val() == '') {
+        $('#image-url').val(data.image);
+      }
+
+      // submit editted data for recipe
+      $('#submit').click(function () {
+        $.ajax({
+          url: '/' + 'recipe' + '/' + $('#id-input').val() + '/' + 'update',
+          type: 'PUT',
+          data: $('#editform').serialize(),
+        });
+      });
+
+      // display modal when recipe clicked
+      modal.style.display = 'block';
+
+      // close modal and clear previous entries
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+          $('#rec-name').attr('src', '');
+          $('#rec-name').val('');
+          $('#public').val('yes');
+          $('.modal-ingredients').empty();
+          $('.feature_thumb').empty();
+          $('#ing-div').empty();
+          $('#editform').attr('action', '');
+          $('#upload_widget').attr('disabled', false);
         }
       };
     },
