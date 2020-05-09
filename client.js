@@ -271,6 +271,9 @@ function editRecipe(element) {
           url: '/' + 'recipe' + '/' + $('#id-input').val() + '/' + 'update',
           type: 'PUT',
           data: $('#editform').serialize(),
+          success: function (result) {
+            location.href = window.location.href;
+          },
         });
       });
 
