@@ -17,6 +17,8 @@ exports.recipe_add = (req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 
+// use mongoose find* to only return name, instructions, image, public
+
 // fetch recipes by userid
 exports.recipes_list = (req, res) => {
   Recipe.find({ userid: req.params.id })
@@ -33,8 +35,8 @@ exports.recipe_view = (req, res) => {
 
 // update a recipe
 exports.recipe_update = (req, res) => {
-  Recipe.findOneAndUpdate(req.params.id, { $set: req.body })
-    .then((recipe) => res.json('Recipe Updates'))
+  Recipe.findByIdAndUpdate(req.params.id, { $set: req.body })
+    .then((recipe) => res.json('Recipe Updated'))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
 
