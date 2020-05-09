@@ -486,7 +486,7 @@ textarea {
 #editform {
   display: grid;
   justify-content: center;
-  grid-template-columns: 55%;
+  grid-template-columns: 60%;
 }
 
 .feature_thumb img {

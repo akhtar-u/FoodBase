@@ -135,7 +135,7 @@ function addItem() {
 
 // remove extra input
 function removeItem() {
-  $('#ing').remove();
+  $('#ing').last().remove();
 }
 
 // submit form to add a new recipe
@@ -241,7 +241,7 @@ function editRecipe(element) {
       ingList.forEach(appendIng);
       function appendIng(item) {
         $('#ing-div').append(
-          "<input name='ingredients' type='text' placeholder='' id='ingperm'" +
+          "<input name='ingredients' type='text' placeholder='' id='ing'" +
             "class='item' value=" +
             item +
             ' required>'
@@ -260,21 +260,31 @@ function editRecipe(element) {
       if (data.public == false) {
         $('#public').val('no');
       }
-
+      // if new image isnt picked, keep current image
       if ($('#image-url').val() == '') {
         $('#image-url').val(data.image);
       }
 
-      // submit editted data for recipe
+      // submit editted data for recipe and reload
+      // check if inputs are empty
       $('#submit').click(function () {
-        $.ajax({
-          url: '/' + 'recipe' + '/' + $('#id-input').val() + '/' + 'update',
-          type: 'PUT',
-          data: $('#editform').serialize(),
-          success: function (result) {
-            location.href = window.location.href;
-          },
-        });
+        let empty = $('#ing-div')
+          .find('input')
+          .filter(function () {
+            return this.value === '';
+          });
+        if (empty.length) {
+          alert('Input can not be left blank');
+        } else {
+          $.ajax({
+            url: '/' + 'recipe' + '/' + $('#id-input').val() + '/' + 'update',
+            type: 'PUT',
+            data: $('#editform').serialize(),
+            success: function (result) {
+              location.href = window.location.href;
+            },
+          });
+        }
       });
 
       // display modal when recipe clicked
