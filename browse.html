@@ -42,28 +42,28 @@
       </div>
     </header>
     <main id="main-browse">
-      <div class="main">
-        <ul class="cards">
-          <li class="cards_item">
-            <div class="card">
-              <div class="card_image">
-                <img
-                  src="https://arbordayblog.org/wp-content/uploads/2018/06/oak-tree-sunset-iStock-477164218-1080x608.jpg"
-                />
-              </div>
-              <div class="card_content">
-                <h1 class="card_title">Recipe Name</h1>
-                <hr />
-                <p class="card_name">
-                  <span id="nickname">Nickname</span>
-                  <br />
-                  Date
-                </p>
-                <button class="btn card_btn signin">View</button>
-              </div>
-            </div>
-          </li>
-        </ul>
+      <div class="container">
+        <div class="gallery"></div>
+      </div>
+
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="title">
+            <p class="modal-title"></p>
+          </div>
+          <div>
+            <img class="modal-image" src="" />
+          </div>
+          <div>
+            <p id="ing-title">Ingredients:</p>
+            <ul class="modal-ingredients"></ul>
+          </div>
+          <div>
+            <p id="inst-title">Directions:</p>
+            <p class="modal-instructions"></p>
+          </div>
+        </div>
       </div>
     </main>
   </body>

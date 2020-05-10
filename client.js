@@ -195,34 +195,50 @@ function fetchRecipe() {
     url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
     method: 'GET',
     success: function (data) {
-      let modal = document.getElementById('myModal');
-
-      // get array of ingredients
-      let ingList = data.ingredients;
-
-      ingList.forEach(appendIng);
-      function appendIng(item) {
-        $('.modal-ingredients').append('<li>' + item + '</li>');
-      }
-
-      // set modal content to recipe data
-      $('.modal-title').text(data.recipename);
-      $('.modal-image').attr('src', data.image);
-      $('.modal-instructions').text(data.instructions);
-
-      // display modal when recipe clicked
-      modal.style.display = 'block';
-
-      // close modal and clear previous entries
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = 'none';
-          $('.modal-image').attr('src', '');
-          $('.modal-ingredients').empty();
-        }
-      };
+      openModal(data);
     },
   });
+}
+
+function openModal(data) {
+  let modal = document.getElementById('myModal');
+
+  // get array of ingredients
+  let ingList = data.ingredients;
+  let date = data.createdAt;
+
+  ingList.forEach(appendIng);
+  function appendIng(item) {
+    $('.modal-ingredients').append('<li>' + item + '</li>');
+  }
+
+  // set modal content to recipe data
+  $('.modal-title').text(data.recipename);
+  $('.modal-image').attr('src', data.image);
+  $('.modal-instructions').text(data.instructions);
+
+  if (window.location.pathname == '/browse') {
+    $('.title').append(
+      `<p id='namedate'> User: ` +
+        data.nickname +
+        `<br/> Published: ` +
+        date.substring(0, 10) +
+        `</p>`
+    );
+  }
+
+  // display modal when recipe clicked
+  modal.style.display = 'block';
+
+  // close modal and clear previous entries
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      $('.modal-image').attr('src', '');
+      $('.modal-ingredients').empty();
+      $('#namedate').remove();
+    }
+  };
 }
 
 // fetch recipe when clicked from dashboard and generate edit form
@@ -310,12 +326,40 @@ function editRecipe(element) {
 }
 
 // get all public recipes and display on /browse
-/* $.ajax({
-  url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
-  method: 'GET',
-  success: function (data) {
-    $('#main-browse').html(JSON.stringify(data));
-  },
-});
+if (window.location.pathname == '/browse') {
+  $.ajax({
+    url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
+    method: 'GET',
+    success: function (data) {
+      let recipeArray = data;
+      recipeArray.forEach(makeCard);
+    },
+  });
 
-*/
+  // append an image for each recipe
+  function makeCard(recipe) {
+    $('.gallery').append(
+      `<img
+        src='` +
+        recipe.image +
+        `'
+        class='gallery-img'
+        onclick='fetchPublic(this.src)'
+      />`
+    );
+  }
+}
+
+// get image id and send AJAX request
+function fetchPublic(src) {
+  let imgID = src.substring(src.lastIndexOf('_') + 1, src.lastIndexOf('.'));
+
+  $.ajax({
+    url: '/' + 'recipe' + '/' + 'image' + '/' + imgID,
+    method: 'GET',
+    success: function (data) {
+      openModal(data);
+      console.log(data);
+    },
+  });
+}

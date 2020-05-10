@@ -502,7 +502,6 @@ textarea {
 }
 
 /* browse card layout */
-
 .browseheader {
   display: grid;
   justify-content: center;
@@ -517,96 +516,66 @@ textarea {
   justify-content: center;
 }
 
-/* cards css, credit: M H Rabby - codepen.io/mhrkit
- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-}
-
-img {
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.btn {
-  display: grid;
-  width: 100%;
-  border-radius: 0.25rem;
-  border: solid #ffffff 2px;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  border: solid white 0.15rem;
-  display: flex;
-  flex-direction: column;
+/* cards css, credit: https://codepen.io/kehui */
+.gallery {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-gap: 10px;
+  -moz-column-gap: 10px;
+  column-gap: 10px;
+  margin-top: 10px;
   overflow: hidden;
 }
 
-.card_content {
-  padding: 1rem;
-  background: var(--main-color);
+.gallery img {
+  width: 100%;
+  height: auto;
+  transition: 500ms;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  opacity: 0.7;
+  page-break-inside: avoid; /* For Firefox. */
+  -webkit-column-break-inside: avoid; /* For Chrome & friends. */
+  break-inside: avoid; /* For standard browsers like IE. :-) */
 }
 
-.card_title {
-  color: #ffffff;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 0px;
+.gallery img:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
-.card_name {
-  color: #ffffff;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-  font-weight: 400;
+.container {
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-#nickname {
-  font-size: 1.5rem;
-  letter-spacing: 1px;
+@media screen and (max-width: 800px) {
+  .gallery {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+  .gallery div {
+    margin: 0;
+    width: 200px;
+  }
+  .modal-dialog {
+    margin: 0 8vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gallery {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+  .gallery div {
+    margin: 0;
+    width: 200px;
+  }
 }
