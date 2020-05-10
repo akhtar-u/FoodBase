@@ -528,7 +528,7 @@ textarea {
 }
 
 .gallery img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   transition: 500ms;
   margin-bottom: 10px;
