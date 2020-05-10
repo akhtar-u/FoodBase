@@ -345,7 +345,9 @@ if (window.location.pathname == '/browse') {
         `'
         class='gallery-img'
         onclick='fetchPublic(this.src)'
-      />`
+        alt= "` +
+        recipe.recipename +
+        `" />`
     );
   }
 }
@@ -359,7 +361,27 @@ function fetchPublic(src) {
     method: 'GET',
     success: function (data) {
       openModal(data);
-      console.log(data);
     },
   });
+}
+
+// search browse page
+function searchBrowse() {
+  // Declare variables
+  var input, filter, ul, a, i, txtValue;
+  input = document.getElementById('searchdb');
+  filter = input.value.toUpperCase();
+  div = document.getElementById('gallery');
+  image = div.getElementsByTagName('img');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < image.length; i++) {
+    a = image[i];
+    txtValue = $(a).attr('alt');
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      image[i].style.display = '';
+    } else {
+      image[i].style.display = 'none';
+    }
+  }
 }

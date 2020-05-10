@@ -26,7 +26,7 @@
         <form action="" id="searchf">
           <input
             type="text"
-            onkeyup="searchDB()"
+            onkeyup="searchBrowse()"
             placeholder="Enter recipe name..."
             id="searchdb"
           />
@@ -43,9 +43,8 @@
     </header>
     <main id="main-browse">
       <div class="container">
-        <div class="gallery"></div>
+        <div class="gallery" id="gallery"></div>
       </div>
-
       <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
