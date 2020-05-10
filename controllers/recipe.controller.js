@@ -27,7 +27,7 @@ exports.recipes_list = (req, res) => {
 
 // fetch all recipes that are public
 exports.recipe_public = (req, res) => {
-  Recipe.find({ public: req.params.id }, 'image public -_id')
+  Recipe.find({ public: req.params.id }, 'image recipename public -_id')
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
