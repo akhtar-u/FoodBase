@@ -11,8 +11,11 @@ router.get('/:id', recipe_controller.recipes_list);
 // fetch a recipes by id
 router.get('/:id/view', recipe_controller.recipe_view);
 
-// fetch all recipes that are public
+// fetch images of all recipes that are public
 router.get('/public/:id', recipe_controller.recipe_public);
+
+// fetch public recipe being clicked
+router.get('/image/:id', recipe_controller.recipe_pubrec);
 
 // update recipe
 router.put('/:id/update', recipe_controller.recipe_update);

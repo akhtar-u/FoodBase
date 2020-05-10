@@ -26,11 +26,17 @@ exports.recipes_list = (req, res) => {
 };
 
 // fetch all recipes that are public
-// only return: recipename, instructions, image, date and nickname
 exports.recipe_public = (req, res) => {
-  Recipe.find(
-    { public: req.params.id },
-    'recipename image nickname ingredients instructions createdAt public -_id'
+  Recipe.find({ public: req.params.id }, 'image public -_id')
+    .then((recipe) => res.json(recipe))
+    .catch((err) => res.status(400).json('Error: ' + err));
+};
+
+// fetch the recipe that is being clicked on /browse
+exports.recipe_pubrec = (req, res) => {
+  Recipe.findOne(
+    { image: { $regex: req.params.id, $options: 'i' } },
+    'image recipename createdAt instructions ingredients nickname -_id'
   )
     .then((recipe) => res.json(recipe))
     .catch((err) => res.status(400).json('Error: ' + err));
