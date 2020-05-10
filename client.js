@@ -8,13 +8,13 @@ $.ajax({
 
     if (emailVerified == true) {
       $('#userid-input').attr('value', userid);
-      $('#nick-input').val(data.nickname);
+      $('#nick-input').val(data.name);
       getRecipes(userid);
     } else {
       verify();
     }
 
-    $('#usertitle').html(data.nickname + "'s Recipes");
+    $('#usertitle').html(data.name + "'s Recipes");
   },
 });
 
@@ -170,7 +170,7 @@ $(document).ready(function () {
           ],
           upload_preset: 'ml_default',
           thumbnails: '.feature_thumb',
-          thumbnailTransformation: [{ width: 3000, height: 300, crop: 'fit' }],
+          thumbnailTransformation: [{ width: 300, height: 300, crop: 'fit' }],
           return_delete_token: true,
           multiple: false,
         },
@@ -339,14 +339,14 @@ if (window.location.pathname == '/browse') {
   // append an image for each recipe
   function makeCard(recipe) {
     $('.gallery').append(
-      `<img
-        src='` +
+      `<img data-src=` +
         recipe.image +
-        `'
-        class='gallery-img'
-        onclick='fetchPublic(this.src)'
+        ` class='lazyload'
+        onclick='fetchPublic(this.src)'        
         alt= "` +
         recipe.recipename +
+        ` ` +
+        recipe.nickname +
         `" />`
     );
   }
