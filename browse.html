@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="client.js"></script>
+    <script src="https://afarkas.github.io/lazysizes/lazysizes.min.js"></script>
+
+    <title>Browse Recipes</title>
+  </head>
+  <body>
+    <header class="gridheader">
+      <div class="head1">
+        <a href="/dashboard">
+          <button class="signin dashboard" id="dashboard">
+            Dashboard
+          </button>
+        </a>
+      </div>
+      <div class="head2">
+        <form action="" id="searchf">
+          <input
+            type="text"
+            onkeyup="searchBrowse()"
+            placeholder="Enter recipe name..."
+            id="searchdb"
+          />
+          <i class="material-icons" id="search-icon">search</i>
+        </form>
+      </div>
+      <div class="head3">
+        <a href="/recform"
+          ><button class="signin addrec-bt" id="addrec-bt">
+            Add Recipe
+          </button>
+        </a>
+      </div>
+    </header>
+    <main id="main-browse">
+      <div class="container">
+        <div class="gallery" id="gallery"></div>
+      </div>
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="title">
+            <p class="modal-title"></p>
+          </div>
+          <div>
+            <img class="modal-image" src="" />
+          </div>
+          <div>
+            <p id="ing-title">Ingredients:</p>
+            <ul class="modal-ingredients"></ul>
+          </div>
+          <div>
+            <p id="inst-title">Directions:</p>
+            <p class="modal-instructions"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

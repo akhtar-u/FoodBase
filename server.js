@@ -25,7 +25,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://quiet-peak-18609.herokuapp.com/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
@@ -33,7 +33,6 @@ const config = {
 // use bodyparser to parse requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 // serve static files
@@ -41,18 +40,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 // use recipe routes
 app.use('/recipe', recipe);
 
-app.get('/dashboard', requiresAuth(), (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/dashboard.html'));
+// public routes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
-app.get('/recform', requiresAuth(), (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/recipeform.html'));
-});
+
 app.get('/browse', (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/browse.html'));
+  res.sendFile(path.join(__dirname, 'browse.html'));
 });
+
+// authenticated routes require login
+app.get('/dashboard', requiresAuth(), (req, res) => {
+  res.sendFile(path.join(__dirname, 'dashboard.html'));
+});
+
+app.get('/recform', requiresAuth(), (req, res) => {
+  res.sendFile(path.join(__dirname, 'recipeform.html'));
+});
+
 app.get('/profile', requiresAuth(), (req, res) => {
   res.send(req.openid.user);
 });
 
-app.listen(process.env.port || 3000);
-console.log('Running at Port 3000');
+app.listen(process.env.PORT || 3000);
+console.log('Server Running!');

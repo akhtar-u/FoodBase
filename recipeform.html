@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
+      
+    <script src="client.js"></script>
+    <title>Add a new recipe</title>
+  </head>
+  <body>
+    <body class="body-form">
+      <header class="gridheader">
+        <div class="head1">
+          <a href="/browse"
+            ><button class="signin browse" id="browse">
+              Browse
+            </button>
+          </a>
+        </div>
+        <div class="head2">
+          <a href="/dashboard"
+            ><button class="signin dashboard" id="dashboard">
+              Dashboard
+            </button>
+          </a>
+        </div>
+        <div class="head3">
+          <a href="/logout"
+            ><button class="signin signout" id="signout">
+              Sign Out
+            </button>
+          </a>
+        </div>
+      </header>
+      <main class="main-form">       
+        <form action="/recipe/add" method="POST" id='addform'>
+          <label><b>Recipe Name: </b></label>
+          <input name='recipename' type="text" placeholder="Enter Recipe Name" id='rec-name' required>
+
+          <input name='userid' type="hidden" value= required id='userid-input'> 
+          <input name='nickname' type="hidden" value='' required id='nick-input'>        
+
+          <label ><b>Choose Image: </b></label>
+          <button href="#" id="upload_widget" class='signin'>Upload image</button>
+          <input name='image' type="hidden" value='' id='image-url' required>
+          <div class="feature_thumb"/></div>          
+        
+          <label ><b>Ingredients: </b></label> 
+
+          <div id='ing-div'>             
+          <input name='ingredients' type="text" placeholder="" id='ingperm' class='item' required>
+          </div>
+
+          <div class='addremove'>
+          <div id="ing-btn-div">
+          <a class="signin icona" id='addrec-btn' onclick="addItem()">
+            <i class="material-icons"id='add-icon'>add</i></a>
+          </div>
+          <div id="ing-btn-div">
+            <a class="signin icona" id='addrec-btn' onclick="removeItem()">
+              <i class="material-icons"id='add-icon'>remove</i></a>
+          </div>
+        </div>
+          
+          <label id="instruction"><b>Instructions: </b></label>
+          <textarea name='instructions' type="text" placeholder="Enter Instructions" id="ins-input" required></textarea>
+          
+          <label><b>Make Recipe Public? </b></label>
+          <select name='public' id="public">
+            <option value="yes">yes</option>
+            <option value="no">no</option>        
+          </select>           
+          
+          <div class="submitbtn">
+          <a>
+            <button onclick='' class="signin submit" id="submit" type="submit">
+                Submit
+              </button>
+            </a>
+          </div>  
+      </form>   
+  </main>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+  </body>
+</html>
