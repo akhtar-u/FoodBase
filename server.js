@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
-// serve static files
+// serve static files using a new folder
 app.use(express.static(path.join(__dirname, 'static')));
 // use recipe routes
 app.use('/recipe', recipe);
