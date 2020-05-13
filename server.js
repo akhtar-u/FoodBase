@@ -25,7 +25,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'https://quiet-peak-18609.herokuapp.com/',
+  baseURL: 'http://www.foodbase.ca/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
