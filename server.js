@@ -25,7 +25,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'http://www.foodbase.ca/',
+  baseURL: 'https://www.foodbase.ca/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
