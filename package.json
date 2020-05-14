@@ -13,6 +13,7 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-naked-redirect": "^0.1.7",
     "express-openid-connect": "^1.0.1",
     "heroku-ssl-redirect": "0.0.4",
     "mongodb": "^3.5.7",

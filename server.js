@@ -26,7 +26,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'https://www.foodbase.ca/',
+  baseURL: 'https://foodbase.ca/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
@@ -37,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 
 app.use(auth(config));
+app.use(require('express-naked-redirect')(true));
 app.use(sslRedirect());
 // serve static files using a new folder
 app.use(express.static(path.join(__dirname, 'files')));
