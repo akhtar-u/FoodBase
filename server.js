@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const { auth } = require('express-openid-connect');
 const { requiresAuth } = require('express-openid-connect');
 const sslRedirect = require('heroku-ssl-redirect');
-const urlRedirect = require('express-naked-redirect')(true);
 require('dotenv').config();
 const recipe = require('./routes/recipe.route');
 const mongoose = require('mongoose');
@@ -27,7 +26,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'https://foodbase.ca/',
+  baseURL: 'https://www.foodbase.ca/' || 'https://foodbase.ca/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
@@ -38,7 +37,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 
 app.use(auth(config));
-app.use(urlRedirect(true));
 app.use(sslRedirect());
 // serve static files using a new folder
 app.use(express.static(path.join(__dirname, 'files')));
