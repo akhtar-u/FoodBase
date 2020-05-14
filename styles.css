@@ -1,0 +1,581 @@
+:root {
+  --main-color: rgba(18, 32, 54, 1);
+}
+
+@font-face {
+  font-family: myFont;
+  src: url(assets/MarcellusSC.ttf);
+}
+
+body {
+  background-color: var(--main-color);
+  color: white;
+  padding: 0;
+  margin: 0;
+  font-family: myFont;
+}
+
+/*flexbox layout*/
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-img {
+  flex-grow: 1;
+}
+
+/*header layout*/
+.header nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.25rem solid white;
+}
+
+.signin {
+  background: transparent;
+  border: transparent;
+  color: white;
+  font-size: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  font-family: myFont;
+}
+
+.signin:hover {
+  border-radius: 0.25rem;
+  color: var(--main-color);
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 4rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/*main layout*/
+.main-img {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 350px;
+  padding: 0;
+  margin: 0;
+  background: url(https://res.cloudinary.com/dnemvvifx/image/upload/v1589159325/tfoxcgdz2lqjkszm18nu.webp)
+    no-repeat center / cover;
+}
+
+/*footer layout*/
+.footer {
+  display: flex;
+  flex-direction: column-reverse;
+  border-top: 0.25rem solid white;
+}
+
+.footer p {
+  display: flex;
+  font-size: 2rem;
+  margin: 0;
+  padding: 1rem;
+}
+
+.footer img {
+  width: 2rem;
+  height: 2rem;
+  padding: 1rem;
+  padding-right: 1rem;
+}
+
+.footer small {
+  padding: 1rem;
+}
+
+.top {
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+.top:hover {
+  opacity: 0.5;
+}
+
+/* mobile layout */
+@media screen and (min-width: 550px) {
+  .header .signin {
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer p {
+    margin-bottom: 0;
+  }
+}
+
+/* Dashboard Layout */
+
+.gridheader {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  border-bottom: solid white 0.25rem;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.head1 {
+  display: grid;
+  justify-content: left;
+}
+
+.head2 {
+  display: grid;
+  justify-content: center;
+}
+.head3 {
+  display: grid;
+  justify-content: right;
+}
+
+#searchdb {
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  color: white;
+  border: 2px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+  font-size: 1.25rem;
+}
+
+.search {
+  display: inline-flex;
+  vertical-align: top;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+#searchf {
+  margin-top: 0.25rem;
+}
+
+#search-icon {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+/* for diplaying user recipes in dashboard */
+.main-db {
+  display: grid;
+}
+#addrec {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+#addrec > div {
+  display: grid;
+  justify-content: center;
+}
+#addrec p {
+  display: grid;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+a {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  text-decoration: none;
+}
+ul {
+  display: grid;
+  list-style-type: none;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.recipediv {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 0.2fr 0.2fr 0.2fr 2fr;
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+#rec-date {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+label {
+  font-size: 1rem;
+}
+
+li {
+  display: grid;
+  justify-content: center;
+}
+
+.icona {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+}
+
+i {
+  margin-top: 0.25rem;
+}
+
+.reclink {
+  text-align: center;
+}
+
+/* recipe addition form layout */
+
+#addform {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 55%;
+}
+
+.submitbtn {
+  display: grid;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.main-form label {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.main-form input,
+textarea {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+}
+
+::placeholder {
+  color: white;
+  font-family: myFont;
+}
+
+input[type='text']:focus {
+  border: 3px solid var(--main-color);
+}
+textarea[type='text']:focus {
+  border: 3px solid var(--main-color);
+}
+textarea {
+  resize: none;
+  height: 8rem;
+  font-size: 1.25rem;
+}
+
+select {
+  padding: 1rem;
+  font-size: 1.25rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 6px;
+  background-color: var(--main-color);
+  font-family: myFont;
+  width: 6rem;
+}
+select:focus {
+  border: 3px solid var(--main-color);
+}
+
+#img-choose {
+  font-family: myFont;
+}
+
+#img-upload {
+  margin: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+#ing-div {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 75%;
+}
+
+#ing {
+  border-radius: unset;
+  border-top: hidden;
+  border-right: hidden;
+  border-left: hidden;
+  width: 10rem;
+}
+
+#ingperm {
+  border-radius: unset;
+  border-top: hidden;
+  border-right: hidden;
+  border-left: hidden;
+  width: 10rem;
+}
+
+.item {
+  margin: 0.5rem;
+}
+
+#add-icon {
+  font-size: 3rem;
+}
+
+#addrec-btn {
+  margin-top: 0.5rem;
+  padding: 0rem;
+}
+
+#ing-btn-div {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto;
+  align-items: center;
+}
+
+#ing-div {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+input,
+textarea {
+  font-family: myFont;
+}
+
+#public {
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
+#upload_widget {
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+#upload_widget:hover {
+  border-radius: 0.25rem;
+  color: var(--main-color);
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+#upload_widget:disabled {
+  cursor: not-allowed;
+}
+
+.addremove {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto;
+}
+
+/* modal popup styling - taken from W3Schools*/
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--main-color);
+  margin: 2% auto; /* 15% from the top and centered */
+  border: 4px solid white;
+  border-radius: 8px;
+  width: 60%; /* Could be more or less, depending on screen size */
+  word-break: break-all;
+  padding: 0.5rem;
+  overflow: auto;
+}
+.modal-title {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.modal-image {
+  width: 80%;
+  border: 2px solid white;
+  border-radius: 8px;
+}
+
+.modal-instructions {
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.modal-ingredients {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto;
+  column-gap: 10%;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.modal-ingredients > li {
+  padding: 0.25rem;
+}
+
+#ing-title {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+#inst-title {
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/* styling for edit recipe modal */
+.modal-editing {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--main-color);
+  margin: 2% auto; /* 15% from the top and centered */
+  border: 4px solid white;
+  border-radius: 8px;
+  width: 70%; /* Could be more or less, depending on screen size */
+  word-break: break-all;
+  padding: 0.5rem;
+  overflow: auto;
+}
+
+#currentimage {
+  width: 40%;
+  border: 2px solid white;
+  border-radius: 8px;
+}
+
+#editform {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 60%;
+}
+
+.feature_thumb img {
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+}
+.feature_thumb a {
+  color: white;
+  font-size: 2rem;
+}
+
+/* browse card layout */
+.browseheader {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 50% 50%;
+  border-bottom: solid white 0.25rem;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.browsebtn {
+  display: grid;
+  justify-content: center;
+}
+
+/* cards css, credit: https://codepen.io/kehui */
+.gallery {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-gap: 10px;
+  -moz-column-gap: 10px;
+  column-gap: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.gallery img {
+  max-width: 100%;
+  height: auto;
+  transition: 500ms;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  opacity: 0.7;
+  page-break-inside: avoid; /* For Firefox. */
+  -webkit-column-break-inside: avoid; /* For Chrome & friends. */
+  break-inside: avoid; /* For standard browsers like IE. :-) */
+}
+
+.gallery img:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.container {
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .gallery {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+  .gallery div {
+    margin: 0;
+    width: 200px;
+  }
+  .modal-dialog {
+    margin: 0 8vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gallery {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+  .gallery div {
+    margin: 0;
+    width: 200px;
+  }
+}
