@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { auth } = require('express-openid-connect');
 const { requiresAuth } = require('express-openid-connect');
 const sslRedirect = require('heroku-ssl-redirect');
+const urlRedirect = require('express-naked-redirect')(true);
 require('dotenv').config();
 const recipe = require('./routes/recipe.route');
 const mongoose = require('mongoose');
@@ -37,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 
 app.use(auth(config));
-app.use(require('express-naked-redirect')(true));
+app.use(urlRedirect(true));
 app.use(sslRedirect());
 // serve static files using a new folder
 app.use(express.static(path.join(__dirname, 'files')));
