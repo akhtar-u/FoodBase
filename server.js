@@ -26,7 +26,7 @@ const config = {
   appSession: {
     secret: process.env.AUTH_SECRET,
   },
-  baseURL: 'https://www.foodbase.ca/' || 'https://foodbase.ca/',
+  baseURL: 'https://foodbase.ca/',
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUER,
 };
@@ -34,9 +34,18 @@ const config = {
 // use bodyparser to parse requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// auth router attaches /login, /logout, and /callback routes to the baseURL
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
+
+app.get('/*', function (req, res, next) {
+  if (req.headers.host.match(/^www/) !== null) {
+    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
+  } else {
+    next();
+  }
+});
+
 app.use(sslRedirect());
 // serve static files using a new folder
 app.use(express.static(path.join(__dirname, 'files')));
