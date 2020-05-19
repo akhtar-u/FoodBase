@@ -1,3 +1,4 @@
+// AJAX Requests to server
 // obtain user profile and pass parameters to get data from db
 $.ajax({
   url: '/' + 'profile',
@@ -36,11 +37,71 @@ function getRecipes(userid) {
     });
 }
 
-// ask user to verify email before being able to use website
-function verify() {
-  $('.main-db').html('Please verify your email!');
+// submit form to add a new recipe
+$('#addform').submit(function (e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/' + 'recipe' + '/' + 'add',
+    data: form.serialize(),
+  });
+});
+
+// fetch recipe when clicked from dashboard and generate recipe modal
+function fetchRecipe() {
+  let recipeID = this.id;
+
+  // get recipe data for selected recipe
+  $.ajax({
+    url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
+    method: 'GET',
+    success: function (data) {
+      openModal(data);
+    },
+  });
 }
 
+// get all public recipes and display on /browse
+if (window.location.pathname == '/browse') {
+  $.ajax({
+    url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
+    method: 'GET',
+    success: function (data) {
+      let recipeArray = data;
+      recipeArray.forEach(makeCard);
+    },
+  });
+
+  // append an image for each recipe
+  function makeCard(recipe) {
+    $('.gallery').append(
+      `<img data-src=` +
+        recipe.image +
+        ` class='lazyload'
+        onclick='fetchPublic(this.src)'        
+        alt= "` +
+        recipe.recipename +
+        ` ` +
+        recipe.nickname +
+        `" />`
+    );
+  }
+}
+
+// get image id and send AJAX request to view recipe
+function fetchPublic(src) {
+  let imgID = src.substring(src.lastIndexOf('_') + 1, src.lastIndexOf('.'));
+
+  $.ajax({
+    url: '/' + 'recipe' + '/' + 'image' + '/' + imgID,
+    method: 'GET',
+    success: function (data) {
+      openModal(data);
+    },
+  });
+}
+
+//DASHBOARD View
 // list all recipes for user and get id of each recipe
 function dashboardView(recipes) {
   recipes.forEach((element) => {
@@ -82,6 +143,11 @@ function dashboardView(recipes) {
   });
 }
 
+// ask user to verify email before being able to use website
+function verify() {
+  $('.main-db').html('Please verify your email!');
+}
+
 // remove recipe item from dashboard and send AJAX delete req to DB
 function deleteRecipe(element) {
   // remove from DOM
@@ -102,27 +168,7 @@ function deleteRecipe(element) {
   }
 }
 
-// search recipe by name / hide which don't match
-function searchDB() {
-  // Declare variables
-  var input, filter, ul, a, i, txtValue;
-  input = document.getElementById('searchdb');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById('recipelist');
-  div = ul.getElementsByTagName('div');
-
-  // Loop through all list items, and hide those who don't match the search query
-  for (i = 0; i < div.length; i++) {
-    a = div[i];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      div[i].style.display = '';
-    } else {
-      div[i].style.display = 'none';
-    }
-  }
-}
-
+//RECIPE FORM VIEW
 // add input for another ingredient
 function addItem() {
   let newInput = document.createElement('input');
@@ -138,16 +184,6 @@ function addItem() {
 function removeItem() {
   $('#ing').last().remove();
 }
-
-// submit form to add a new recipe
-$('#addform').submit(function (e) {
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    url: '/' + 'recipe' + '/' + 'add',
-    data: form.serialize(),
-  });
-});
 
 // image upload widget through cloudinary
 $(document).ready(function () {
@@ -186,20 +222,7 @@ $(document).ready(function () {
   $('.cloudinary-delete').attr('color', 'white');
 });
 
-// fetch recipe when clicked from dashboard and generate recipe modal
-function fetchRecipe() {
-  let recipeID = this.id;
-
-  // get recipe data for selected recipe
-  $.ajax({
-    url: '/' + 'recipe' + '/' + recipeID + '/' + 'view',
-    method: 'GET',
-    success: function (data) {
-      openModal(data);
-    },
-  });
-}
-
+//MODAL VIEW
 function openModal(data) {
   let modal = document.getElementById('myModal');
 
@@ -325,44 +348,27 @@ function editRecipe(element) {
   });
 }
 
-// get all public recipes and display on /browse
-if (window.location.pathname == '/browse') {
-  $.ajax({
-    url: '/' + 'recipe' + '/' + 'public' + '/' + 'true',
-    method: 'GET',
-    success: function (data) {
-      let recipeArray = data;
-      recipeArray.forEach(makeCard);
-    },
-  });
+// SEARCH Functions
 
-  // append an image for each recipe
-  function makeCard(recipe) {
-    $('.gallery').append(
-      `<img data-src=` +
-        recipe.image +
-        ` class='lazyload'
-        onclick='fetchPublic(this.src)'        
-        alt= "` +
-        recipe.recipename +
-        ` ` +
-        recipe.nickname +
-        `" />`
-    );
+// search recipe by name / hide which don't match
+function searchDB() {
+  // Declare variables
+  var input, filter, ul, a, i, txtValue;
+  input = document.getElementById('searchdb');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById('recipelist');
+  div = ul.getElementsByTagName('div');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < div.length; i++) {
+    a = div[i];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      div[i].style.display = '';
+    } else {
+      div[i].style.display = 'none';
+    }
   }
-}
-
-// get image id and send AJAX request
-function fetchPublic(src) {
-  let imgID = src.substring(src.lastIndexOf('_') + 1, src.lastIndexOf('.'));
-
-  $.ajax({
-    url: '/' + 'recipe' + '/' + 'image' + '/' + imgID,
-    method: 'GET',
-    success: function (data) {
-      openModal(data);
-    },
-  });
 }
 
 // search browse page
