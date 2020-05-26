@@ -67,8 +67,7 @@ body {
   min-height: 350px;
   padding: 0;
   margin: 0;
-  background: url(https://res.cloudinary.com/dnemvvifx/image/upload/v1589159325/tfoxcgdz2lqjkszm18nu.webp)
-    no-repeat center / cover;
+  background: url(assets/main.webp) no-repeat center / cover;
 }
 
 /*footer layout*/
