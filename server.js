@@ -48,7 +48,7 @@ app.get('/*', function (req, res, next) {
 
 app.use(sslRedirect());
 // serve static files using a new folder
-app.use(express.static(path.join(__dirname, 'files')));
+app.use(express.static(path.join(__dirname, 'public')));
 // use recipe routes
 app.use('/recipe', recipe);
 
