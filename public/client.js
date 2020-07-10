@@ -240,6 +240,14 @@ function openModal(data) {
   $('.modal-image').attr('src', data.image);
   $('.modal-instructions').text(data.instructions);
 
+  // change color of numbers in modal instructions
+  let mInstPara = document.getElementById('m-inst');
+
+  mInstPara.innerHTML = mInstPara.innerHTML.replace(
+    /([0-9-])/gi,
+    '<span style="color: yellow">$1</span>'
+  );
+
   if (window.location.pathname == '/browse') {
     $('.title').append(
       `<p id='namedate'> User: ` +
