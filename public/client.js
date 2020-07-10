@@ -290,9 +290,9 @@ function editRecipe(element) {
       function appendIng(item) {
         $('#ing-div').append(
           "<input name='ingredients' type='text' placeholder='' id='ing'" +
-            "class='item' value=" +
+            "class='item' value='" +
             item +
-            ' required>'
+            "' required>'"
         );
       }
 
