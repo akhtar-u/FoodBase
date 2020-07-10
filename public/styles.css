@@ -480,7 +480,7 @@ textarea {
 }
 
 #currentimage {
-  width: 40%;
+  width: 100%;
   border: 2px solid white;
   border-radius: 8px;
 }
