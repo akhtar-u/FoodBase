@@ -292,7 +292,7 @@ function editRecipe(element) {
           "<input name='ingredients' type='text' placeholder='' id='ing'" +
             "class='item' value='" +
             item +
-            "' required>'"
+            "' required>"
         );
       }
 
