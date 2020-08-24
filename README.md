@@ -1,4 +1,4 @@
-# FoodBase - Store and Browse your favourite recipes!
+# FoodBase.ca - Store and Browse your favourite recipes!
  - NodeJS/Express backend
  - JavaScript/jQuery/HTML/CSS for front end
  - MongoDB Atlas for database
