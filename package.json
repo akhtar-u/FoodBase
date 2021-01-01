@@ -16,7 +16,7 @@
     "express-openid-connect": "^1.0.1",
     "heroku-ssl-redirect": "0.0.4",
     "mongodb": "^3.5.7",
-    "mongoose": "^5.9.11"
+    "mongoose": "^5.11.9"
   },
   "engines": {
     "node": "13.x",
